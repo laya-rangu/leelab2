@@ -1,0 +1,77 @@
+-- ✅ USERS
+CREATE TABLE IF NOT EXISTS users (
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  email TEXT UNIQUE NOT NULL,
+  password TEXT NOT NULL,
+  role TEXT DEFAULT 'student',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ✅ PEOPLE
+CREATE TABLE IF NOT EXISTS people (
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  role TEXT,
+  bio TEXT,
+  photo TEXT,
+  is_alumni BOOLEAN DEFAULT FALSE
+);
+
+-- ✅ PUBLICATIONS
+CREATE TABLE IF NOT EXISTS publications (
+  id SERIAL PRIMARY KEY,
+  title TEXT NOT NULL,
+  authors TEXT,
+  journal TEXT,
+  year INTEGER,
+  link TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ✅ RESEARCH
+CREATE TABLE IF NOT EXISTS research (
+  id SERIAL PRIMARY KEY,
+  title TEXT NOT NULL,
+  description TEXT,
+  link TEXT
+);
+
+-- ✅ TEACHING
+CREATE TABLE IF NOT EXISTS teaching (
+  id SERIAL PRIMARY KEY,
+  course_name TEXT NOT NULL,
+  section TEXT,
+  time TEXT,
+  location TEXT,
+  description TEXT
+);
+
+-- ✅ NEWS ✅ (THIS IS YOUR CURRENT CRASH)
+CREATE TABLE IF NOT EXISTS news (
+  id SERIAL PRIMARY KEY,
+  title TEXT NOT NULL,
+  description TEXT,
+  image TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ✅ CONTACTS
+CREATE TABLE IF NOT EXISTS contacts (
+  id SERIAL PRIMARY KEY,
+  name TEXT,
+  email TEXT,
+  subject TEXT,
+  message TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ✅ MATERIAL REQUESTS
+CREATE TABLE IF NOT EXISTS material_requests (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  item_name TEXT NOT NULL,
+  quantity INTEGER NOT NULL,
+  reason TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
