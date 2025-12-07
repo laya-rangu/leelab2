@@ -1,7 +1,6 @@
 import pool from "../config/db.js";
-import { fetchTweets } from "../utils/twitterAPI.js";
 import { addNewsDB } from "../models/newsModel.js";
-
+import { fetchMyTweets } from "../utils/twitterAPI.js";
 // ✅ ADMIN → Add News
 export const createNews = async (req, res) => {
   try {
@@ -95,6 +94,28 @@ export const importTwitterNews = async (req, res) => {
     });
   } catch (err) {
     console.error("Import failed:", err);
+    res.status(500).json({ message: "Twitter import failed" });
+  }
+};
+export const importFromMyTwitter = async (req, res) => {
+  try {
+    const tweets = await fetchMyTweets();
+
+    if (!tweets.length) {
+      return res.status(404).json({ message: "No tweets found" });
+    }
+
+    const latestTweet = tweets[0];
+
+    // ✅ IMPORTANT: RETURN to form, DO NOT SAVE
+    res.json({
+      title: "X Update",
+      description: latestTweet.text,
+      image: "",
+      source: "x"
+    });
+  } catch (err) {
+    console.error("Import from my Twitter failed:", err);
     res.status(500).json({ message: "Twitter import failed" });
   }
 };

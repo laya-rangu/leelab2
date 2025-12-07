@@ -104,33 +104,31 @@ export default function ManageNews() {
         >
           Archived News
         </button>
-        <button
+  
+  <button
   className="btn btn-info mb-3"
   onClick={async () => {
     try {
-      const { data } = await API.post("/news/import/twitter");
+      const { data } = await API.post("/news/import/my-twitter");
 
-      // ✅ Load imported tweet into the form
       setForm({
-        title: data.title || "Twitter Update",
-        description: data.description || "",
-        image: data.image || "",
-        source: "twitter"
+        title: data.title,
+        description: data.description,
+        image: "",
+        source: "x"
       });
 
-      // ✅ Make sure we are in ADD mode
       setEditingId(null);
 
-      alert("Twitter news loaded into form. You can now edit and post it.");
+      alert("Your latest tweet is loaded into the form. Edit and publish.");
     } catch (err) {
-      alert("Failed to import from Twitter");
+      alert("Failed to load your tweets.");
       console.error(err);
     }
   }}
 >
-  Import from Twitter
+  Import From My X Account
 </button>
-
 
       </div>
 
