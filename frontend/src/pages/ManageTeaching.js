@@ -144,7 +144,7 @@ export default function ManageTeaching() {
           <p><b>Location:</b> {c.location}</p>
           <p><b>Description:</b> {c.description}</p>
           <p><b>Prerequisites:</b> {c.prerequisites}</p>
-
+          <div className="d-flex gap-2 flex-wrap mt-2">
           {!showArchived ? (
             <>
               <button
@@ -176,7 +176,7 @@ export default function ManageTeaching() {
           >
             Delete
           </button>
-
+        </div>
         </div>
       ))}
     </div>

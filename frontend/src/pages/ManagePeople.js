@@ -214,7 +214,7 @@ export default function ManagePeople() {
       </div>
 
       {/* ✅ CATEGORY BUTTONS */}
-      <div className="d-flex gap-2 mb-4">
+      <div className="d-flex justify-content-start align-items-center gap-2 mt-2">
         <button
           className={`btn ${activeTab === "faculty" ? "btn-primary" : "btn-outline-primary"}`}
           onClick={() => setActiveTab("faculty")}
@@ -248,9 +248,10 @@ export default function ManagePeople() {
           {p.role === "alumni" && (
             <p><b>End:</b> {p.end_date || "N/A"}</p>
           )}
-
+          <div className="d-flex gap-2 flex-wrap mt-2">
           <button
             className="btn btn-warning btn-sm"
+            style={{ minWidth: "90px" }}
             onClick={() => startEdit(p)}
           >
             Edit
@@ -258,7 +259,8 @@ export default function ManagePeople() {
 
           {p.role === "student" && (
             <button
-              className="btn btn-info btn-sm ms-2"
+              className="btn btn-info btn-sm "
+              style={{ minWidth: "120px" }}
               onClick={() => promote(p.id)}
             >
               Push to Alumni
@@ -266,12 +268,14 @@ export default function ManagePeople() {
           )}
 
           <button
-            className="btn btn-danger btn-sm ms-2"
+            className="btn btn-danger btn-sm "
+            style={{ minWidth: "90px" }}
             onClick={() => archive(p.id)}
           >
             Archive
           </button>
 
+        </div>
         </div>
       ))}
 

@@ -2,6 +2,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useState } from "react";
+import logo from "../assets/logo.png";
 
 export default function Navbar() {
   const { user, logout } = useAuth();
@@ -15,12 +16,17 @@ export default function Navbar() {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-4 shadow">
-      {/* ✅ BRAND */}
-      <Link className="navbar-brand fw-bold fs-4 text-white" to="/">
-        Lee Lab
-      </Link>
+    
+      <Link className="navbar-brand d-flex align-items-center" to="/">
+  <img
+    src={logo}
+    alt="Lee Lab Logo"
+    style={{ height: "40px" }}
+  />
+</Link>
+      
 
-      {/* ✅ MOBILE TOGGLE */}
+      
       <button
         className="navbar-toggler"
         type="button"
@@ -32,7 +38,7 @@ export default function Navbar() {
 
       <div className="collapse navbar-collapse" id="leeNavbar">
 
-        {/* ✅ PUBLIC LINKS — ALWAYS VISIBLE */}
+      
         <ul className="navbar-nav me-auto mb-2 mb-lg-0 gap-3">
           <li className="nav-item"><Link className="nav-link" to="/people">People</Link></li>
           <li className="nav-item"><Link className="nav-link" to="/research">Research</Link></li>
@@ -41,7 +47,7 @@ export default function Navbar() {
           <li className="nav-item"><Link className="nav-link" to="/news">News</Link></li>
           <li className="nav-item"><Link className="nav-link" to="/contact">Contact</Link></li>
 
-          {/* ✅ STUDENT ONLY — MATERIAL REQUEST FORM */}
+          
           {user?.role === "student" && (
             <li className="nav-item">
               <Link className="nav-link fw-bold text-warning" to="/materials">
@@ -51,10 +57,10 @@ export default function Navbar() {
           )}
         </ul>
 
-        {/* ✅ RIGHT SIDE (LOGIN / ADMIN / LOGOUT) */}
+        
         <ul className="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
           
-          {/* ✅ ADMIN DROPDOWN */}
+        
           {user?.role === "admin" && (
             <li className="nav-item dropdown me-3">
               <button
@@ -119,14 +125,14 @@ export default function Navbar() {
                   </Link>
                 </li>
 
-                {/* ✅ ✅ ✅ ADMIN → MATERIAL REQUESTS (WITH NOTES & CHECKBOX) */}
+              
                 <li>
                   <Link className="dropdown-item" to="/admin/materials">
                     Material Requests
                   </Link>
                 </li>
 
-                {/* ✅ ✅ ✅ ADMIN → MANAGE EQUIPMENT */}
+               
                 <li>
                   <Link className="dropdown-item" to="/admin/equipment">
                     Manage Equipment
@@ -137,7 +143,7 @@ export default function Navbar() {
             </li>
           )}
 
-          {/* ✅ LOGIN BUTTON (NOT LOGGED IN) */}
+         
           {!user && (
             <li className="nav-item">
               <Link className="btn btn-primary fw-bold" to="/login">
@@ -146,7 +152,7 @@ export default function Navbar() {
             </li>
           )}
           
-          {/* ✅ CHANGE PASSWORD + LOGOUT BUTTON (LOGGED IN) */}
+         
 {user && (
   <>
     <li className="nav-item me-2">

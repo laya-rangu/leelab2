@@ -136,9 +136,10 @@ export default function ManagePublications() {
           <a href={p.link} target="_blank" rel="noreferrer">
             Publication Link
           </a>
-
+          <div className="d-flex gap-2 flex-wrap mt-2">
           {!showArchived ? (
             <>
+                         
               <button
                 className="btn btn-warning btn-sm"
                 onClick={() => startEdit(p)}
@@ -168,8 +169,9 @@ export default function ManagePublications() {
           >
             Delete
           </button>
-
+        </div> 
         </div>
+        
       ))}
     </div>
   );

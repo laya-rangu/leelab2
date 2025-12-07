@@ -25,9 +25,13 @@ export default function News() {
 />
 
           )}
-
-          {n.source && <small>Source: {n.source}</small>}
-        </div>
+          {n.source && (
+  <span className={`badge ${n.source === "twitter" ? "bg-info" : "bg-secondary"}`}>
+    {n.source.toUpperCase()}
+  </span>
+)}
+ 
+          </div>
       ))}
     </div>
   );

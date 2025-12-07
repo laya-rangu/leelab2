@@ -124,12 +124,15 @@ export default function ViewForms() {
               />
 
               {/* ✅ ARCHIVE BUTTON */}
+              <div className="d-inline-flex mt-2">
               <button
-                className="btn btn-danger btn-sm"
+                className="btn btn-danger btn-sm mt-2"
+                style={{ minWidth: "140px" }}
                 onClick={() => archiveForm(i.id)}
               >
                 Archive
               </button>
+             </div>
             </>
           )}
 

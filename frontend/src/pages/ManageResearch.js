@@ -133,7 +133,7 @@ export default function ManageResearch() {
           <p>{r.description}</p>
           <p><b>People:</b> {r.people_involved}</p>
           <p><b>Links:</b> {r.links}</p>
-
+          <div className="d-flex gap-2 flex-wrap mt-2">  
           {!showArchived ? (
             <>
               <button
@@ -165,7 +165,7 @@ export default function ManageResearch() {
           >
             Delete
           </button>
-
+        </div>
         </div>
       ))}
     </div>

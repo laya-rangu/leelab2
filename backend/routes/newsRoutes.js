@@ -6,6 +6,7 @@ import {
   archiveNews,
   restoreNews
 } from "../controllers/newsController.js";
+import { importTwitterNews } from "../controllers/newsController.js";
 
 import { protect, adminOnly } from "../middleware/authMiddleware.js";
 
@@ -25,5 +26,6 @@ router.put("/archive/:id", protect, adminOnly, archiveNews);
 
 // ✅ ADMIN → Restore
 router.put("/restore/:id", protect, adminOnly, restoreNews);
+router.post("/import/twitter", protect, adminOnly, importTwitterNews);
 
 export default router;

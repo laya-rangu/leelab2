@@ -104,6 +104,34 @@ export default function ManageNews() {
         >
           Archived News
         </button>
+        <button
+  className="btn btn-info mb-3"
+  onClick={async () => {
+    try {
+      const { data } = await API.post("/news/import/twitter");
+
+      // ✅ Load imported tweet into the form
+      setForm({
+        title: data.title || "Twitter Update",
+        description: data.description || "",
+        image: data.image || "",
+        source: "twitter"
+      });
+
+      // ✅ Make sure we are in ADD mode
+      setEditingId(null);
+
+      alert("Twitter news loaded into form. You can now edit and post it.");
+    } catch (err) {
+      alert("Failed to import from Twitter");
+      console.error(err);
+    }
+  }}
+>
+  Import from Twitter
+</button>
+
+
       </div>
 
       {/* ✅ ADD / EDIT FORM (ONLY FOR ACTIVE) */}
@@ -168,7 +196,8 @@ export default function ManageNews() {
           <h5>{n.title}</h5>
           <p>{n.description}</p>
           {n.source && <p className="text-muted">Source: {n.source}</p>}
-
+          
+          <div className="d-flex gap-2 flex-wrap mt-2">
           {!showArchived ? (
             <>
               <button
@@ -200,6 +229,7 @@ export default function ManageNews() {
           >
             Delete
           </button>
+          </div>  
         </div>
       ))}
     </div>
