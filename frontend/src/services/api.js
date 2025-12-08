@@ -4,7 +4,13 @@ import axios from "axios";
 //   baseURL: "http://localhost:5000/api",
 // });
 
-const baseURL = process.env.REACT_APP_API_BASE_URL || "http://localhost:5000";
+// const baseURL = process.env.REACT_APP_API_BASE_URL || "http://localhost:5000";
+
+const rawBaseURL =
+  process.env.REACT_APP_API_BASE_URL || "http://localhost:5000";
+
+// Ensure we always talk to /api on that backend
+const baseURL = rawBaseURL.replace(/\/+$/, "") + "/api";
 
 const API = axios.create({
   baseURL,
