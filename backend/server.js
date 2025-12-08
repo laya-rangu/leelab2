@@ -90,7 +90,7 @@ app.listen(PORT, () => {
 });
 
 // Serve React frontend static files
-const frontendBuildPath = path.join(__dirname, "../frontend/build"); // or "../frontend/build" for CRA
+const frontendBuildPath = path.join(__dirname, "../frontend/"); // or "../frontend/build" for CRA
 
 app.use(express.static(frontendBuildPath));
 
