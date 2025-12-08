@@ -32,7 +32,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 
 import authRoutes from "./routes/authRoutes.js";
-import peopleRoutes from "./routes/peopleRoutes.js";   // ✅ REQUIRED
+import peopleRoutes from "./routes/peopleRoutes.js"; // ✅ REQUIRED
 import publicationRoutes from "./routes/publicationRoutes.js";
 import researchRoutes from "./routes/researchRoutes.js";
 import teachingRoutes from "./routes/teachingRoutes.js";
@@ -43,6 +43,7 @@ import materialRoutes from "./routes/materialRoutes.js";
 import carouselRoutes from "./routes/carouselRoutes.js";
 import pool from "./config/db.js";
 import dashboardRoutes from "./routes/dashboardRoutes.js";
+
 dotenv.config();
 const app = express();
 
@@ -57,7 +58,7 @@ app.get("/api/test", (req, res) => {
 
 // ✅ ROUTE MOUNTING (THIS IS WHAT YOU WERE MISSING)
 app.use("/api/auth", authRoutes);
-app.use("/api/people", peopleRoutes);        // ✅ PEOPLE ACTIVE HERE
+app.use("/api/people", peopleRoutes); // ✅ PEOPLE ACTIVE HERE
 app.use("/api/publications", publicationRoutes);
 app.use("/api/research", researchRoutes);
 app.use("/api/teaching", teachingRoutes);
@@ -70,9 +71,10 @@ app.use("/api/carousel", carouselRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 
 // ✅ DB TEST
-pool.query("SELECT 1")
+pool
+  .query("SELECT 1")
   .then(() => console.log("✅ PostgreSQL Connected"))
-  .catch(err => console.error("❌ PostgreSQL connection error:", err));
+  .catch((err) => console.error("❌ PostgreSQL connection error:", err));
 
 // ✅ SINGLE LISTENER (ONLY ONCE)
 const PORT = 5000;

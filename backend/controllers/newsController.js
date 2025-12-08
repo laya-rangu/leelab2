@@ -49,10 +49,9 @@ export const getArchivedNews = async (req, res) => {
 // ✅ ADMIN → Archive News
 export const archiveNews = async (req, res) => {
   try {
-    await pool.query(
-      "UPDATE news SET is_archived = true WHERE id = $1",
-      [req.params.id]
-    );
+    await pool.query("UPDATE news SET is_archived = true WHERE id = $1", [
+      req.params.id,
+    ]);
 
     res.json({ message: "Archived" });
   } catch (err) {
@@ -64,10 +63,9 @@ export const archiveNews = async (req, res) => {
 // ✅ ADMIN → Restore News
 export const restoreNews = async (req, res) => {
   try {
-    await pool.query(
-      "UPDATE news SET is_archived = false WHERE id = $1",
-      [req.params.id]
-    );
+    await pool.query("UPDATE news SET is_archived = false WHERE id = $1", [
+      req.params.id,
+    ]);
 
     res.json({ message: "Restored" });
   } catch (err) {
@@ -90,7 +88,7 @@ export const importTwitterNews = async (req, res) => {
       title: "Twitter Update",
       description: latestTweet.text,
       image: null,
-      source: "twitter"
+      source: "twitter",
     });
   } catch (err) {
     console.error("Import failed:", err);
@@ -112,10 +110,20 @@ export const importFromMyTwitter = async (req, res) => {
       title: "X Update",
       description: latestTweet.text,
       image: "",
-      source: "x"
+      source: "x",
     });
   } catch (err) {
     console.error("Import from my Twitter failed:", err);
     res.status(500).json({ message: "Twitter import failed" });
+  }
+};
+
+export const deleteNews = async (req, res) => {
+  try {
+    await pool.query("DELETE FROM news WHERE id = $1", [req.params.id]);
+    res.json({ message: "Deleted" });
+  } catch (err) {
+    console.error("Delete news error:", err);
+    res.status(500).json({ message: "Server error" });
   }
 };

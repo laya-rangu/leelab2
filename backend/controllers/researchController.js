@@ -3,13 +3,18 @@ import pool from "../config/db.js";
 // ✅ ADMIN → CREATE RESEARCH
 export const createResearch = async (req, res) => {
   try {
-    const { name, description, people_involved, links } = req.body;
+    const { title, name, description, people_involved, links } = req.body;
+    const finalTitle = title ?? name;
+
+    if (!finalTitle) {
+      return res.status(400).json({ message: "Title is required" });
+    }
 
     const { rows } = await pool.query(
-      `INSERT INTO research (name, description, people_involved, links)
+      `INSERT INTO research (title description, people_involved, links)
        VALUES ($1,$2,$3,$4)
        RETURNING *`,
-      [name, description, people_involved, links]
+      [finalTitle, description, people_involved, links]
     );
 
     res.json(rows[0]);
@@ -48,17 +53,22 @@ export const getArchivedResearch = async (req, res) => {
 // ✅ ADMIN → UPDATE RESEARCH
 export const updateResearch = async (req, res) => {
   try {
-    const { name, description, people_involved, links } = req.body;
+    const { title, name, description, people_involved, links } = req.body;
+    const finalTitle = title ?? name;
+
+    if (!finalTitle) {
+      return res.status(400).json({ message: "Title is required" });
+    }
 
     const { rows } = await pool.query(
       `UPDATE research SET
-        name=$1,
+        title=$1,
         description=$2,
         people_involved=$3,
         links=$4
        WHERE id=$5
        RETURNING *`,
-      [name, description, people_involved, links, req.params.id]
+      [finalTitle, description, people_involved, links, req.params.id]
     );
 
     res.json(rows[0]);
@@ -82,10 +92,9 @@ export const deleteResearch = async (req, res) => {
 // ✅ ADMIN → ARCHIVE
 export const archiveResearch = async (req, res) => {
   try {
-    await pool.query(
-      "UPDATE research SET is_archived = true WHERE id=$1",
-      [req.params.id]
-    );
+    await pool.query("UPDATE research SET is_archived = true WHERE id=$1", [
+      req.params.id,
+    ]);
     res.json({ message: "Archived" });
   } catch (err) {
     console.error("Archive research error:", err);
@@ -96,10 +105,9 @@ export const archiveResearch = async (req, res) => {
 // ✅ ADMIN → RESTORE
 export const restoreResearch = async (req, res) => {
   try {
-    await pool.query(
-      "UPDATE research SET is_archived = false WHERE id=$1",
-      [req.params.id]
-    );
+    await pool.query("UPDATE research SET is_archived = false WHERE id=$1", [
+      req.params.id,
+    ]);
     res.json({ message: "Restored" });
   } catch (err) {
     console.error("Restore research error:", err);

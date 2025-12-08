@@ -32,73 +32,130 @@ export default function App() {
     <>
       <Navbar />
 
-      <Routes>
-        {/* ✅ PUBLIC */}
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<Login />} />
+      <div style={{ paddingTop: "60px" }}>
+        <Routes>
+          {/* ✅ PUBLIC */}
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<Login />} />
 
-        <Route path="/people" element={<People />} />
-        <Route path="/publications" element={<Publications />} />
-        <Route path="/research" element={<Research />} />
-        <Route path="/teaching" element={<Teaching />} />
-        <Route path="/news" element={<News />} />
-        <Route path="/contact" element={<Contact />} />
+          <Route path="/people" element={<People />} />
+          <Route path="/publications" element={<Publications />} />
+          <Route path="/research" element={<Research />} />
+          <Route path="/teaching" element={<Teaching />} />
+          <Route path="/news" element={<News />} />
+          <Route path="/contact" element={<Contact />} />
 
-        {/* ✅ STUDENT */}
-        <Route
-          path="/materials"
-          element={
-            <ProtectedRoute>
-              <RequestMaterials />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-  path="/change-password"
-  element={
-    <ProtectedRoute>
-      <ChangePassword />
-    </ProtectedRoute>
-  }
-/>
+          {/* ✅ STUDENT */}
+          <Route
+            path="/materials"
+            element={
+              <ProtectedRoute>
+                <RequestMaterials />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/change-password"
+            element={
+              <ProtectedRoute>
+                <ChangePassword />
+              </ProtectedRoute>
+            }
+          />
 
+          {/* ✅ ADMIN */}
+          <Route
+            path="/admin"
+            element={
+              <AdminRoute>
+                <DashboardAdmin />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/users"
+            element={
+              <AdminRoute>
+                <ManageUsers />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/people"
+            element={
+              <AdminRoute>
+                <ManagePeople />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/publications"
+            element={
+              <AdminRoute>
+                <ManagePublications />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/research"
+            element={
+              <AdminRoute>
+                <ManageResearch />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/teaching"
+            element={
+              <AdminRoute>
+                <ManageTeaching />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/news"
+            element={
+              <AdminRoute>
+                <ManageNews />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/forms"
+            element={
+              <AdminRoute>
+                <ViewForms />
+              </AdminRoute>
+            }
+          />
 
-        {/* ✅ ADMIN */}
-        <Route path="/admin" element={<AdminRoute><DashboardAdmin /></AdminRoute>} />
-        <Route path="/admin/users" element={<AdminRoute><ManageUsers /></AdminRoute>} />
-        <Route path="/admin/people" element={<AdminRoute><ManagePeople /></AdminRoute>} />
-        <Route path="/admin/publications" element={<AdminRoute><ManagePublications /></AdminRoute>} />
-        <Route path="/admin/research" element={<AdminRoute><ManageResearch /></AdminRoute>} />
-        <Route path="/admin/teaching" element={<AdminRoute><ManageTeaching /></AdminRoute>} />
-        <Route path="/admin/news" element={<AdminRoute><ManageNews /></AdminRoute>} />
-        <Route path="/admin/forms" element={<AdminRoute><ViewForms /></AdminRoute>} />
-        
-        <Route
-  path="/admin/carousel"
-  element={
-    <AdminRoute>
-      <ManageCarousel />
-    </AdminRoute>
-  }
-/>
-        <Route
-  path="/admin/materials"
-  element={
-    <AdminRoute>
-      <ViewMaterialRequests />
-    </AdminRoute>
-  }
-/>
+          <Route
+            path="/admin/carousel"
+            element={
+              <AdminRoute>
+                <ManageCarousel />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/materials"
+            element={
+              <AdminRoute>
+                <ViewMaterialRequests />
+              </AdminRoute>
+            }
+          />
 
-<Route
-  path="/admin/equipment"
-  element={
-    <AdminRoute>
-      <ManageEquipment />
-    </AdminRoute>
-  }
-/>
-         </Routes>
+          <Route
+            path="/admin/equipment"
+            element={
+              <AdminRoute>
+                <ManageEquipment />
+              </AdminRoute>
+            }
+          />
+        </Routes>
+      </div>
 
       <Footer />
     </>

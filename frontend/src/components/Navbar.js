@@ -1,4 +1,3 @@
-
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useState } from "react";
@@ -15,18 +14,11 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-4 shadow">
-    
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-4 shadow fixed-top">
       <Link className="navbar-brand d-flex align-items-center" to="/">
-  <img
-    src={logo}
-    alt="Lee Lab Logo"
-    style={{ height: "40px" }}
-  />
-</Link>
-      
+        <img src={logo} alt="Lee Lab Logo" style={{ height: "40px" }} />
+      </Link>
 
-      
       <button
         className="navbar-toggler"
         type="button"
@@ -37,17 +29,38 @@ export default function Navbar() {
       </button>
 
       <div className="collapse navbar-collapse" id="leeNavbar">
-
-      
         <ul className="navbar-nav me-auto mb-2 mb-lg-0 gap-3">
-          <li className="nav-item"><Link className="nav-link" to="/people">People</Link></li>
-          <li className="nav-item"><Link className="nav-link" to="/research">Research</Link></li>
-          <li className="nav-item"><Link className="nav-link" to="/publications">Publications</Link></li>
-          <li className="nav-item"><Link className="nav-link" to="/teaching">Teaching</Link></li>
-          <li className="nav-item"><Link className="nav-link" to="/news">News</Link></li>
-          <li className="nav-item"><Link className="nav-link" to="/contact">Contact</Link></li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/people">
+              People
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/research">
+              Research
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/publications">
+              Publications
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/teaching">
+              Teaching
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/news">
+              News
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/contact">
+              Contact
+            </Link>
+          </li>
 
-          
           {user?.role === "student" && (
             <li className="nav-item">
               <Link className="nav-link fw-bold text-warning" to="/materials">
@@ -57,10 +70,7 @@ export default function Navbar() {
           )}
         </ul>
 
-        
         <ul className="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
-          
-        
           {user?.role === "admin" && (
             <li className="nav-item dropdown me-3">
               <button
@@ -70,8 +80,11 @@ export default function Navbar() {
                 Admin
               </button>
 
-              <ul className={`dropdown-menu dropdown-menu-end ${showAdminMenu ? "show" : ""}`}>
-
+              <ul
+                className={`dropdown-menu dropdown-menu-end ${
+                  showAdminMenu ? "show" : ""
+                }`}
+              >
                 <li>
                   <Link className="dropdown-item" to="/admin">
                     Dashboard
@@ -84,10 +97,10 @@ export default function Navbar() {
                   </Link>
                 </li>
                 <li>
-  <Link className="dropdown-item" to="/admin/carousel">
-    Manage Carousel Images
-  </Link>
-</li>
+                  <Link className="dropdown-item" to="/admin/carousel">
+                    Manage Carousel Images
+                  </Link>
+                </li>
 
                 <li>
                   <Link className="dropdown-item" to="/admin/people">
@@ -125,25 +138,21 @@ export default function Navbar() {
                   </Link>
                 </li>
 
-              
                 <li>
                   <Link className="dropdown-item" to="/admin/materials">
                     Material Requests
                   </Link>
                 </li>
 
-               
                 <li>
                   <Link className="dropdown-item" to="/admin/equipment">
                     Manage Equipment
                   </Link>
                 </li>
-
               </ul>
             </li>
           )}
 
-         
           {!user && (
             <li className="nav-item">
               <Link className="btn btn-primary fw-bold" to="/login">
@@ -151,30 +160,29 @@ export default function Navbar() {
               </Link>
             </li>
           )}
-          
-         
-{user && (
-  <>
-    <li className="nav-item me-2">
-      <Link
-        className="btn btn-outline-light fw-bold"
-        to="/change-password"
-      >
-        Change Password
-      </Link>
-    </li>
 
-    <li className="nav-item">
-      <button
-        className="btn btn-danger fw-bold"
-        onClick={handleLogout}
-      >
-        Logout
-      </button>
-    </li>
-  </>
-)}
-  </ul>
+          {user && (
+            <>
+              <li className="nav-item me-2">
+                <Link
+                  className="btn btn-outline-light fw-bold"
+                  to="/change-password"
+                >
+                  Change Password
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                <button
+                  className="btn btn-danger fw-bold"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </button>
+              </li>
+            </>
+          )}
+        </ul>
       </div>
     </nav>
   );

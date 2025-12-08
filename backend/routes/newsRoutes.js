@@ -4,7 +4,8 @@ import {
   getActiveNews,
   getArchivedNews,
   archiveNews,
-  restoreNews
+  deleteNews,
+  restoreNews,
 } from "../controllers/newsController.js";
 import { importTwitterNews } from "../controllers/newsController.js";
 import { importFromMyTwitter } from "../controllers/newsController.js";
@@ -28,11 +29,8 @@ router.put("/archive/:id", protect, adminOnly, archiveNews);
 // ✅ ADMIN → Restore
 router.put("/restore/:id", protect, adminOnly, restoreNews);
 router.post("/import/twitter", protect, adminOnly, importTwitterNews);
-router.post(
-  "/import/my-twitter",
-  protect,
-  adminOnly,
-  importFromMyTwitter
-);
+router.post("/import/my-twitter", protect, adminOnly, importFromMyTwitter);
+
+router.delete("/:id", deleteNews);
 
 export default router;
