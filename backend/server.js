@@ -44,8 +44,15 @@ import carouselRoutes from "./routes/carouselRoutes.js";
 import pool from "./config/db.js";
 import dashboardRoutes from "./routes/dashboardRoutes.js";
 
+import path from "path";
+import { fileURLToPath } from "url";
+
 dotenv.config();
 const app = express();
+
+// needed because you're using ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // ✅ MIDDLEWARE
 app.use(cors());
@@ -77,7 +84,17 @@ pool
   .catch((err) => console.error("❌ PostgreSQL connection error:", err));
 
 // ✅ SINGLE LISTENER (ONLY ONCE)
-const PORT = 5000;
+const PORT = process.env.PORT || 5000 || 5432;
 app.listen(PORT, () => {
   console.log(`✅ Server running on port ${PORT}`);
+});
+
+// Serve React frontend static files
+const frontendBuildPath = path.join(__dirname, "../frontend/dist"); // or "../frontend/build" for CRA
+
+app.use(express.static(frontendBuildPath));
+
+// For any unknown route, send back index.html (React Router)
+app.get("*", (req, res) => {
+  res.sendFile(path.join(frontendBuildPath, "index.html"));
 });
