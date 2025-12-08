@@ -90,11 +90,15 @@ app.listen(PORT, () => {
 });
 
 // Serve React frontend static files
-const frontendBuildPath = path.join(__dirname, "../frontend/"); // or "../frontend/build" for CRA
+// const frontendBuildPath = path.join(__dirname, "../frontend/"); // or "../frontend/build" for CRA
 
-app.use(express.static(frontendBuildPath));
+// app.use(express.static(frontendBuildPath));
 
-// For any unknown route, send back index.html (React Router)
-app.get("*", (req, res) => {
-  res.sendFile(path.join(frontendBuildPath, "index.html"));
+// // For any unknown route, send back index.html (React Router)
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(frontendBuildPath, "index.html"));
+// });
+
+app.get("/", (req, res) => {
+  res.send("Lee Lab backend is running");
 });
