@@ -56,7 +56,7 @@ const __dirname = path.dirname(__filename);
 
 const allowedOrigins = [
   "http://localhost:3000", // CRA dev
-  "https://<your-frontend-static>.onrender.com", // Render static site URL
+  "https://leelab-page.onrender.com", // Render static site URL
 ];
 
 // ✅ MIDDLEWARE
